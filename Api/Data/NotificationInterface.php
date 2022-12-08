@@ -5,20 +5,22 @@
 namespace AlbertMage\Notification\Api\Data;
 
 /**
- * NotificationMessage Interface
+ * Notification Interface
  * @author Albert Shen <albertshen1206@gmail.com>
  */
-interface NotificationMessageInterface
+interface NotificationInterface
 {
 
     /**#@+
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
     const ID = 'id';
+    const CUSTOMER_ID = 'customer_id';
+    const STORE_ID = 'store_id';
     const TOUSER = 'touser';
     const INCREMENT_ID = 'increment_id';
     const TYPE = 'type';
-    const EVENT = 'envent';
+    const EVENT = 'event';
     const TEMPLATE_ID = 'template_id';
     const MESSAGE_DATA = 'message_data';
     const GATEWAY = 'gateway';
@@ -42,6 +44,36 @@ interface NotificationMessageInterface
      * @return $this
      */
     public function setId($id);
+
+    /**
+     * Get customerId
+     *
+     * @return int
+     */
+    public function getCustomerId();
+
+    /**
+     * Set customerId
+     *
+     * @param int $customerId
+     * @return $this
+     */
+    public function setCustomerId($customerId);
+
+    /**
+     * Get storeId
+     *
+     * @return int
+     */
+    public function getStoreId();
+
+    /**
+     * Set storeId
+     *
+     * @param int $storeId
+     * @return $this
+     */
+    public function setStoreId($storeId);
 
     /**
      * Get Touser
@@ -121,7 +153,7 @@ interface NotificationMessageInterface
     /**
      * Get Message Data
      *
-     * @return array
+     * @return string
      */
     public function getMessageData();
 

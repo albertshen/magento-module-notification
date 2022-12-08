@@ -1,6 +1,21 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<!--   
     <event name="sales_order_place_after">
-        <observer name="albertmage_sales_order_place_after" instance="AlbertMage\Sms\Observer\Sales\SalesOrderPlaceAfter"/>
+        <observer name="albertmage_sales_order_place_after" instance="AlbertMage\Notification\Observer\Sales\SalesOrderPlaceAfter"/>
+    </event>
+-->
+    <event name="sales_model_service_quote_submit_success">
+        <observer name="sendEmail" disabled="true"/>
+        <observer name="notifyOrderCreate" instance="AlbertMage\Notification\Observer\OrderCreate"/>
+    </event>
+    <event name="order_cancel_after">
+        <observer name="notifySalesOrderCancel" instance="AlbertMage\Notification\Observer\OrderCancel"/>
+    </event>
+    <event name="order_expire_notice">
+        <observer name="notifyOrderExpireNotice" instance="AlbertMage\Notification\Observer\OrderExpireNotice"/>
+    </event>
+    <event name="sales_order_payment_catpure">
+        <observer name="noticePaymentCapture" instance="AlbertMage\Notification\Observer\OrderPaymentCatpure"/>
     </event>
 </config>

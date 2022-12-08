@@ -1,6 +1,6 @@
 <?php
 /**
- * Notification message resource model
+ * Notification resource model
  *
  * Copyright © PHP Digital, Inc. All rights reserved.
  */
@@ -11,7 +11,7 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 /**
  * @author Albert Shen <albertshen1206@gmail.com>
  */
-class NotificationMessage extends AbstractDb
+class Notification extends AbstractDb
 {
     /**
      * Initialize resource model

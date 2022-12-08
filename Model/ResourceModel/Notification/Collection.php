@@ -2,10 +2,9 @@
 /**
  * Copyright © PHP Digital, Inc. All rights reserved.
  */
-namespace AlbertMage\Notification\Model\ResourceModel\NotificationMessage;
+namespace AlbertMage\Notification\Model\ResourceModel\Notification;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use AlbertMage\Notification\Model\ResourceModel\NotificationMessage;
 
 /**
  * Class Collection
@@ -20,7 +19,7 @@ class Collection extends AbstractCollection
      */
     protected function _construct()
     {
-        $this->_init(\AlbertMage\Notification\Model\NotificationMessage::class,
-            NotificationMessage::class);
+        $this->_init(\AlbertMage\Notification\Model\Notification::class,
+            \AlbertMage\Notification\Model\ResourceModel\Notification::class);
     }
 }

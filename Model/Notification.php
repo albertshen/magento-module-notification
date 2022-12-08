@@ -2,26 +2,26 @@
 /**
  * Copyright © PHP Digital, Inc. All rights reserved.
  */
-namespace AlbertMage\Sms\Model;
+namespace AlbertMage\Notification\Model;
 
 use Magento\Framework\Model\AbstractModel;
-use AlbertMage\Sms\Api\Data\NotificationMessageInterface;
+use AlbertMage\Notification\Api\Data\NotificationInterface;
 
 /**
- * Class NotificationMessage
+ * Class Notification
  * @author Albert Shen <albertshen1206@gmail.com>
  */
-class NotificationMessage extends AbstractModel implements NotificationMessageInterface
+class Notification extends AbstractModel implements NotificationInterface
 {
     
     /**
-     * Initialize notification message model
+     * Initialize notification model
      *
      * @return void
      */
     protected function _construct()
     {
-        $this->_init(\AlbertMage\Sms\Model\ResourceModel\NotificationMessage::class);
+        $this->_init(\AlbertMage\Notification\Model\ResourceModel\Notification::class);
     }
 
     /**
@@ -44,6 +44,40 @@ class NotificationMessage extends AbstractModel implements NotificationMessageIn
     /**
      * @inheritDoc
      */
+    public function getCustomerId()
+    {
+        return $this->getData(self::CUSTOMER_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCustomerId($customerId)
+    {
+        $this->setData(self::CUSTOMER_ID, $customerId);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStoreId()
+    {
+        return $this->getData(self::STORE_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setStoreId($storeId)
+    {
+        $this->setData(self::STORE_ID, $storeId);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getTouser()
     {
         return $this->getData(self::TOUSER);
@@ -54,7 +88,7 @@ class NotificationMessage extends AbstractModel implements NotificationMessageIn
      */
     public function setTouser($touser)
     {
-        $this->setData(self::TOUSER, $id);
+        $this->setData(self::TOUSER, $touser);
         return $this;
     }
 
@@ -71,7 +105,7 @@ class NotificationMessage extends AbstractModel implements NotificationMessageIn
      */
     public function setIncrementId($incrementId)
     {
-        $this->setData(self::INCREMENT_ID, $id);
+        $this->setData(self::INCREMENT_ID, $incrementId);
         return $this;
     }
 

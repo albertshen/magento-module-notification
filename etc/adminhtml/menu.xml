@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
   <menu>
-    <add id="AlbertMage_Notification::home" title="PHPDigital" module="AlbertMage_Notification" sortOrder="50" resource="Magento_Catalog::home" />
-    <add id="AlbertMage_Notification::post" title="Notification Posts" module="AlbertMage_Notification" sortOrder="10" resource="Magento_Catalog::home" action="admin/notification_message/home/index" parent="AlbertMage_Notification::home" />
+    <add id="AlbertMage_Notification::report" title="Notification" translate="title" module="AlbertMage_Notification" sortOrder="10" parent="Magento_Reports::report" resource="AlbertMage_Notification::report"/>
+    <add id="AlbertMage_Notification::grid" title="Notification Message" module="AlbertMage_Notification" sortOrder="10" parent="AlbertMage_Notification::report" resource="AlbertMage_Notification::grid" action="notification/index/index" />
   </menu>
 </config>

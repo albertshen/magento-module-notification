@@ -1,17 +1,48 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="AlbertMage\Notification\Api\NotificationRepositoryInterface" type="AlbertMage\Notification\Model\NotificationRepository"/>
+    <preference for="AlbertMage\Notification\Api\Data\NotificationSearchResultsInterface" type="AlbertMage\Notification\Model\NotificationSearchResults"/>
+    <preference for="AlbertMage\Notification\Api\Data\NotificationInterface" type="AlbertMage\Notification\Model\Notification"/>
+    <preference for="AlbertMage\Notification\Api\ResponseInterface" type="AlbertMage\Notification\Model\Response"/>
+    <preference for="AlbertMage\Notification\Api\Data\QueueInterface" type="AlbertMage\Notification\Model\Queue" />
+
+    <virtualType name="AlbertMage\Notification\Model\Order\OrderCreateNotifier" type="AlbertMage\Notification\Model\Order\Notifier" />
+    <virtualType name="AlbertMage\Notification\Model\Order\OrderCancelNotifier" type="AlbertMage\Notification\Model\Order\Notifier" />
+    <virtualType name="AlbertMage\Notification\Model\Order\OrderExpireNoticeNotifier" type="AlbertMage\Notification\Model\Order\Notifier" />
+    <virtualType name="AlbertMage\Notification\Model\Order\OrderPaymentCatpureNotifier" type="AlbertMage\Notification\Model\Order\Notifier" />
+    
+    <virtualType name="AlbertMage\Notification\Observer\OrderCreate" type="AlbertMage\Notification\Observer\Order">
+        <arguments>
+            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderCreateNotifier</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Observer\OrderCancel" type="AlbertMage\Notification\Observer\Order">
+        <arguments>
+            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderCancelNotifier</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Observer\OrderExpireNotice" type="AlbertMage\Notification\Observer\Order">
+        <arguments>
+            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderExpireNoticeNotifier</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Observer\OrderPaymentCatpure" type="AlbertMage\Notification\Observer\Order">
+        <arguments>
+            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderPaymentCatpureNotifier</argument>
+        </arguments>
+    </virtualType>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="notification_message_list_data_source" xsi:type="string">AlbertMage\Notification\Model\ResourceModel\Post\Grid\Collection</item>
+                <item name="notification_list_data_source" xsi:type="string">AlbertMage\Notification\Model\ResourceModel\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
-    <virtualType name="AlbertMage\Notification\Model\ResourceModel\Post\Grid\Collection" type="AlbertMage\Notification\Model\ResourceModel\NotificationMessage\Collection">
+    <virtualType name="AlbertMage\Notification\Model\ResourceModel\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">notification_message</argument>
-            <argument name="resourceModel" xsi:type="string">AlbertMage\Notification\Model\NotificationMessage</argument>
+            <argument name="resourceModel" xsi:type="string">AlbertMage\Notification\Model\ResourceModel\Notification</argument>
         </arguments>
     </virtualType>
 </config>

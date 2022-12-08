@@ -5,21 +5,21 @@
 namespace AlbertMage\Notification\Api\Data;
 
 /**
- * Interface for notification message search results.
+ * Interface for node search results.
  * @api
  * @author Albert Shen <albertshen1206@gmail.com>
  */
-interface NotificationMessageSearchResultsInterface extends \Magento\Framework\Api\SearchResultsInterface
+interface NotificationSearchResultsInterface extends \Magento\Framework\Api\SearchResultsInterface
 {
     /**
-     * Get notification message list.
+     * Get node list.
      *
      * @return \AlbertMage\Notification\Api\Data\SocialInterface[]
      */
     public function getItems();
 
     /**
-     * Set notification message list.
+     * Set node list.
      *
      * @param \AlbertMage\Notification\Api\Data\SocialInterface[] $items
      * @return $this
