@@ -31,7 +31,7 @@ interface NotificationRepositoryInterface
     /**
      * Retrieve notification.
      *
-     * @param int $notificationMessageId
+     * @param int $notificationId
      * @return \AlbertMage\Notification\Api\Data\NotificationInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
