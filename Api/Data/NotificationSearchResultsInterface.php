@@ -14,14 +14,14 @@ interface NotificationSearchResultsInterface extends \Magento\Framework\Api\Sear
     /**
      * Get node list.
      *
-     * @return \AlbertMage\Notification\Api\Data\SocialInterface[]
+     * @return \AlbertMage\Notification\Api\Data\NotificationInterface[]
      */
     public function getItems();
 
     /**
      * Set node list.
      *
-     * @param \AlbertMage\Notification\Api\Data\SocialInterface[] $items
+     * @param \AlbertMage\Notification\Api\Data\NotificationInterface[] $items
      * @return $this
      */
     public function setItems(array $items);
