@@ -5,6 +5,10 @@
  */
 namespace AlbertMage\Notification\Model\Order;
 
+use AlbertMage\Notification\Model\Order\NotifierInterface;
+use AlbertMage\Notification\Api\Data\NotificationInterfaceFactory;
+use AlbertMage\Notification\Model\NotificationRepository;
+
 /**
  * Order cancel notifier
  * 
@@ -13,16 +17,33 @@ namespace AlbertMage\Notification\Model\Order;
 class Notifier implements NotifierInterface
 {
     /**
-     * @var \AlbertMage\Notification\Model\Order\NotifierInterface[]
+     * @var NotifierInterface[]
      */
     private $notifiers;
 
     /**
-     * @param \AlbertMage\Notification\Model\Order\NotifierInterface[] $notifiers
+     * @var NotificationInterfaceFactory
      */
-    public function __construct(array $notifiers = [])
-    {
+    protected $notificationInterfaceFactory;
+
+    /**
+     * @var NotificationRepository
+     */
+    protected $notificationRepository;
+
+    /**
+     * @param NotifierInterface[] $notifiers
+     * @param NotificationInterfaceFactory $notificationInterfaceFactory
+     * @param NotificationRepository $notificationRepository
+     */
+    public function __construct(
+        array $notifiers = [],
+        NotificationInterfaceFactory $notificationInterfaceFactory,
+        NotificationRepository $notificationRepository
+    ) {
         $this->notifiers = $notifiers;
+        $this->notificationInterfaceFactory = $notificationInterfaceFactory;
+        $this->notificationRepository = $notificationRepository;
     }
 
     /**
@@ -31,8 +52,14 @@ class Notifier implements NotifierInterface
     public function notify(
         \Magento\Sales\Api\Data\OrderInterface $order
     ) {
-        foreach ($this->notifiers as $notifiers) {
-            $notifiers->notify($order);
+        foreach ($this->notifiers as $notifier) {
+
+            $notification = $this->notificationInterfaceFactory->create();
+
+            $notifier->notify($order, $notification);
+
+            $this->notificationRepository->save($notification);
+
         }
     }
 }

@@ -4,23 +4,46 @@ namespace AlbertMage\Notification\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use AlbertMage\Notification\Model\Order\Notifier;
+use Magento\Framework\MessageQueue\PublisherInterface;
+use AlbertMage\Notification\Api\Data\OrderQueueInterfaceFactory;
 
+/**
+ * Order Observer
+ * @author Albert Shen <albertshen1206@gmail.com>
+ */
 class Order implements ObserverInterface
 {
 
     /**
-     * @var \AlbertMage\Notification\Model\Order\Notifier
+     * @var PublisherInterface
      */
-    private $notifier;
+    private $publisher;
 
     /**
-     * @param Notifier $notifier
+     * @var OrderQueueInterfaceFactory
+     */
+    private $orderQueueFactory;
+
+    /**
+     * @var string
+     */
+    private $queueTopic;
+
+    /**
+     * @param PublisherInterface $publisher
+     * @param OrderQueueInterfaceFactory $orderQueueFactory
+     * @param string $queueTopic
      */
     public function __construct(
-        Notifier $notifier,
+        PublisherInterface $publisher,
+        OrderQueueInterfaceFactory $orderQueueFactory,
+        $event,
+        $queueTopic = null
     ) {
-        $this->notifier = $notifier;
+        $this->publisher = $publisher;
+        $this->orderQueueFactory = $orderQueueFactory;
+        $this->event = $event;
+        $this->queueTopic = $queueTopic;
     }
 
     /**
@@ -29,9 +52,10 @@ class Order implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        $this->notifier->notify(
-            $observer->getEvent()->getOrder()
-        );
+        $queue = $this->orderQueueFactory->create();
+        $queue->setEvent($this->event);
+        $queue->setOrderId($observer->getEvent()->getOrder()->getId());
+        $this->publisher->publish($this->queueTopic, $queue);
     }
 
 }

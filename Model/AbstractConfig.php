@@ -40,11 +40,21 @@ abstract class AbstractConfig implements ConfigInterface
     /**
      * Set store
      *
-     * @return int store
+     * @return void
      */
     public function setStore($store)
     {
         $this->store = $store;
+    }
+
+    /**
+     * Get store
+     *
+     * @return int
+     */
+    public function getStore()
+    {
+        return $this->store;
     }
 
     /**
