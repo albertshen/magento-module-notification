@@ -8,8 +8,8 @@
     <event name="order_create_consume">
         <observer name="notifyOrderCreate" instance="AlbertMage\Notification\Observer\OrderCreateConume"/>
     </event>
-    <event name="order_cancel_consume">
-        <observer name="notifyOrderCreate" instance="AlbertMage\Notification\Observer\OrderCreateConume"/>
+    <event name="order_cancel_consume_after">
+        <observer name="notifyOrderCancel" instance="AlbertMage\Notification\Observer\OrderCancelConumeAfter"/>
     </event>
     <event name="order_expire_notice_consume">
         <observer name="notifyOrderExpireNotice" instance="AlbertMage\Notification\Observer\OrderExpireNoticeConume"/>

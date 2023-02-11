@@ -22,7 +22,7 @@
             <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderCreateNotifier</argument>
         </arguments>
     </virtualType>
-    <virtualType name="AlbertMage\Notification\Observer\OrderCancelConume" type="AlbertMage\Notification\Observer\Order">
+    <virtualType name="AlbertMage\Notification\Observer\OrderCancelConumeAfter" type="AlbertMage\Notification\Observer\Order">
         <arguments>
             <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderCancelNotifier</argument>
         </arguments>
