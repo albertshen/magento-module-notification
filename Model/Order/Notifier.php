@@ -16,10 +16,6 @@ use AlbertMage\Notification\Model\NotificationRepository;
  */
 class Notifier implements NotifierInterface
 {
-    /**
-     * @var NotifierInterface[]
-     */
-    private $notifiers;
 
     /**
      * @var NotificationInterfaceFactory
@@ -32,18 +28,23 @@ class Notifier implements NotifierInterface
     protected $notificationRepository;
 
     /**
+     * @var NotifierInterface[]
+     */
+    private $notifiers;
+
+    /**
      * @param NotifierInterface[] $notifiers
      * @param NotificationInterfaceFactory $notificationInterfaceFactory
      * @param NotificationRepository $notificationRepository
      */
     public function __construct(
-        array $notifiers = [],
         NotificationInterfaceFactory $notificationInterfaceFactory,
-        NotificationRepository $notificationRepository
+        NotificationRepository $notificationRepository,
+        array $notifiers = [],
     ) {
-        $this->notifiers = $notifiers;
         $this->notificationInterfaceFactory = $notificationInterfaceFactory;
         $this->notificationRepository = $notificationRepository;
+        $this->notifiers = $notifiers;
     }
 
     /**
