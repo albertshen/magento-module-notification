@@ -6,21 +6,16 @@
 namespace AlbertMage\Notification\Model\Order;
 
 use AlbertMage\Notification\Model\Order\NotifierInterface;
-use AlbertMage\Notification\Api\Data\NotificationInterfaceFactory;
 use AlbertMage\Notification\Model\NotificationRepository;
+use AlbertMage\Notification\Api\Data\NotificationInterfaceFactory;
 
 /**
  * Order cancel notifier
  * 
  * @author Albert Shen <albertshen1206@gmail.com>
  */
-class Notifier implements NotifierInterface
+class Notifier
 {
-
-    /**
-     * @var NotificationInterfaceFactory
-     */
-    protected $notificationInterfaceFactory;
 
     /**
      * @var NotificationRepository
@@ -28,39 +23,51 @@ class Notifier implements NotifierInterface
     protected $notificationRepository;
 
     /**
-     * @var NotifierInterface[]
+     * @var NotificationInterfaceFactory
      */
-    private $notifiers;
+    protected $notificationInterfaceFactory;
 
     /**
-     * @param NotifierInterface[] $notifiers
-     * @param NotificationInterfaceFactory $notificationInterfaceFactory
+     * @var NotifierInterface[]
+     */
+    protected $notifiers;
+
+    /**
+     * @var string
+     */
+    protected $event;
+
+    /**
      * @param NotificationRepository $notificationRepository
+     * @param NotificationInterfaceFactory $notificationInterfaceFactory
+     * @param string $event
+     * @param NotifierInterface[] $notifiers
      */
     public function __construct(
-        NotificationInterfaceFactory $notificationInterfaceFactory,
         NotificationRepository $notificationRepository,
-        array $notifiers = [],
+        NotificationInterfaceFactory $notificationInterfaceFactory,
+        string $event,
+        array $notifiers = []
     ) {
-        $this->notificationInterfaceFactory = $notificationInterfaceFactory;
         $this->notificationRepository = $notificationRepository;
+        $this->notificationInterfaceFactory = $notificationInterfaceFactory;
+        $this->event = $event;
         $this->notifiers = $notifiers;
     }
 
     /**
-     * {@inheritdoc}
+     * Notify all notifier
+     * @param \Magento\Sales\Api\Data\OrderInterface $order
      */
     public function notify(
         \Magento\Sales\Api\Data\OrderInterface $order
     ) {
         foreach ($this->notifiers as $notifier) {
-
             $notification = $this->notificationInterfaceFactory->create();
-
-            $notifier->notify($order, $notification);
-
-            $this->notificationRepository->save($notification);
-
+            $notifier->notify($order, $this->event, $notification);
+            if ($notification->getTouser()) {
+                $this->notificationRepository->save($notification);
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ class OrderConsume implements ObserverInterface
     /**
      * @var \AlbertMage\Notification\Model\Order\Notifier
      */
-    private $notifier;
+    protected $notifier;
 
     /**
      * @param Notifier $notifier
@@ -29,7 +29,8 @@ class OrderConsume implements ObserverInterface
 
     /**
      * @param Observer $observer
-     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function execute(Observer $observer)
     {

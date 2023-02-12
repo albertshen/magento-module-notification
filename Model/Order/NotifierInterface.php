@@ -16,9 +16,15 @@ interface NotifierInterface
      * Notifies customer.
      *
      * @param \Magento\Sales\Api\Data\OrderInterface $order
-     *
+     * @param string $event
+     * @param \AlbertMage\Notification\Api\Data\NotificationInterface $notification
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return void
      */
     public function notify(
-        \Magento\Sales\Api\Data\OrderInterface $order
+        \Magento\Sales\Api\Data\OrderInterface $order,
+        string $event,
+        \AlbertMage\Notification\Api\Data\NotificationInterface $notification
     );
 }

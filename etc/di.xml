@@ -9,46 +9,6 @@
     <preference for="AlbertMage\Notification\Api\Data\NotificationSearchResultsInterface" type="AlbertMage\Notification\Model\NotificationSearchResults"/>
     <preference for="AlbertMage\Notification\Api\Data\NotificationInterface" type="AlbertMage\Notification\Model\Notification"/>
     <preference for="AlbertMage\Notification\Api\ResponseInterface" type="AlbertMage\Notification\Model\Response"/>
-    <preference for="AlbertMage\Notification\Api\Data\QueueInterface" type="AlbertMage\Notification\Model\Queue" />
-
-
-    <virtualType name="AlbertMage\Notification\Model\Order\OrderCreateNotifier" type="AlbertMage\Notification\Model\Order\Notifier" />
-    <virtualType name="AlbertMage\Notification\Model\Order\OrderCancelNotifier" type="AlbertMage\Notification\Model\Order\Notifier" />
-    <virtualType name="AlbertMage\Notification\Model\Order\OrderExpireNoticeNotifier" type="AlbertMage\Notification\Model\Order\Notifier" />
-    <virtualType name="AlbertMage\Notification\Model\Order\OrderPaymentCatpureNotifier" type="AlbertMage\Notification\Model\Order\Notifier" />
-
-    <virtualType name="AlbertMage\Notification\Observer\OrderCreateConume" type="AlbertMage\Notification\Observer\OrderConume">
-        <arguments>
-            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderCreateNotifier</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="AlbertMage\Notification\Observer\OrderCancelConumeAfter" type="AlbertMage\Notification\Observer\Order">
-        <arguments>
-            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderCancelNotifier</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="AlbertMage\Notification\Observer\OrderExpireNoticeConume" type="AlbertMage\Notification\Observer\OrderConume">
-        <arguments>
-            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderExpireNoticeNotifier</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="AlbertMage\Notification\Observer\OrderPaymentCatpureConume" type="AlbertMage\Notification\Observer\OrderConume">
-        <arguments>
-            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderPaymentCatpureNotifier</argument>
-        </arguments>
-    </virtualType>
-
-    <virtualType name="AlbertMage\Notification\Observer\OrderCreate" type="AlbertMage\Notification\Observer\Order">
-        <arguments>
-            <argument name="queueTopic" xsi:type="string">order.create</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="AlbertMage\Notification\Observer\OrderCancel" type="AlbertMage\Notification\Observer\Order">
-        <arguments>
-            <argument name="queueTopic" xsi:type="string">order.cancel</argument>
-        </arguments>
-    </virtualType>
-
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -62,4 +22,61 @@
             <argument name="resourceModel" xsi:type="string">AlbertMage\Notification\Model\ResourceModel\Notification</argument>
         </arguments>
     </virtualType>
+
+
+    <virtualType name="AlbertMage\Notification\Observer\OrderCreateConsume" type="AlbertMage\Notification\Observer\OrderConsume">
+        <arguments>
+            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderCreateNotifier</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Observer\OrderCancelConsumeAfter" type="AlbertMage\Notification\Observer\OrderConsume">
+        <arguments>
+            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderCancelNotifier</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Observer\OrderExpireNoticeConsume" type="AlbertMage\Notification\Observer\OrderConsume">
+        <arguments>
+            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderExpireNoticeNotifier</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Observer\OrderPaymentCatpureConsume" type="AlbertMage\Notification\Observer\OrderConsume">
+        <arguments>
+            <argument name="notifier" xsi:type="object">AlbertMage\Notification\Model\Order\OrderPaymentCatpureNotifier</argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="AlbertMage\Notification\Model\Order\OrderCreateNotifier" type="AlbertMage\Notification\Model\Order\Notifier">
+        <arguments>
+            <argument name="event" xsi:type="const">AlbertMage\Notification\Model\ConfigInterface::EVENT_ORDER_CREATE</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Model\Order\OrderCancelNotifier" type="AlbertMage\Notification\Model\Order\Notifier">
+        <arguments>
+            <argument name="event" xsi:type="const">AlbertMage\Notification\Model\ConfigInterface::EVENT_ORDER_CANCEL</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Model\Order\OrderExpireNoticeNotifier" type="AlbertMage\Notification\Model\Order\Notifier">
+        <arguments>
+            <argument name="event" xsi:type="const">AlbertMage\Notification\Model\ConfigInterface::EVENT_ORDER_EXPIRE_NOTICE</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Model\Order\OrderPaymentCatpureNotifier" type="AlbertMage\Notification\Model\Order\Notifier">
+        <arguments>
+            <argument name="event" xsi:type="const">AlbertMage\Notification\Model\ConfigInterface::EVENT_PAYMENT_CAPTURE</argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="AlbertMage\Notification\Observer\OrderCreate" type="AlbertMage\Notification\Observer\Order">
+        <arguments>
+            <argument name="queueTopic" xsi:type="string">order.create</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AlbertMage\Notification\Observer\OrderCancel" type="AlbertMage\Notification\Observer\Order">
+        <arguments>
+            <argument name="queueTopic" xsi:type="string">order.cancel</argument>
+        </arguments>
+    </virtualType>
+
 </config>

@@ -6,15 +6,15 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="order_create_consume">
-        <observer name="notifyOrderCreate" instance="AlbertMage\Notification\Observer\OrderCreateConume"/>
+        <observer name="notifyOrderCreate" instance="AlbertMage\Notification\Observer\OrderCreateConsume"/>
     </event>
     <event name="order_cancel_consume_after">
-        <observer name="notifyOrderCancel" instance="AlbertMage\Notification\Observer\OrderCancelConumeAfter"/>
+        <observer name="notifyOrderCancel" instance="AlbertMage\Notification\Observer\OrderCancelConsumeAfter"/>
     </event>
     <event name="order_expire_notice_consume">
-        <observer name="notifyOrderExpireNotice" instance="AlbertMage\Notification\Observer\OrderExpireNoticeConume"/>
+        <observer name="notifyOrderExpireNotice" instance="AlbertMage\Notification\Observer\OrderExpireNoticeConsume"/>
     </event>
     <event name="order_payment_capture_consume">
-        <observer name="noticeOrderPaymentCapture" instance="AlbertMage\Notification\Observer\OrderPaymentCatpureConume"/>
+        <observer name="noticeOrderPaymentCapture" instance="AlbertMage\Notification\Observer\OrderPaymentCatpureConsume"/>
     </event>
 </config>
