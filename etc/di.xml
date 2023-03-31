@@ -8,7 +8,7 @@
     <preference for="AlbertMage\Notification\Api\NotificationRepositoryInterface" type="AlbertMage\Notification\Model\NotificationRepository"/>
     <preference for="AlbertMage\Notification\Api\Data\NotificationSearchResultsInterface" type="AlbertMage\Notification\Model\NotificationSearchResults"/>
     <preference for="AlbertMage\Notification\Api\Data\NotificationInterface" type="AlbertMage\Notification\Model\Notification"/>
-    <preference for="AlbertMage\Notification\Api\ResponseInterface" type="AlbertMage\Notification\Model\Response"/>
+    <preference for="AlbertMage\Notification\Api\Data\ResponseInterface" type="AlbertMage\Notification\Model\Response"/>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">

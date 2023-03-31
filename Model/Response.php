@@ -6,37 +6,23 @@
  */
 namespace AlbertMage\Notification\Model;
 
-use AlbertMage\Notification\Api\ResponseInterface;
+use Magento\Framework\DataObject;
+use AlbertMage\Notification\Api\Data\ResponseInterface;
 
 /**
  * Interface for sms result.
  * @api
  * @since 100.0.2
  */
-class Response implements ResponseInterface
+class Response extends DataObject implements ResponseInterface
 {
-
-    /**
-     * @var string
-     */
-    private $sid;
-
-    /**
-     * @var string
-     */
-    private $status;
-
-    /**
-     * @var string
-     */
-    private $body;
 
     /**
      * @inheritdoc
      */
     public function getSid()
     {
-        return $this->sid;
+        return $this->getData(self::SID);
     }
 
     /**
@@ -44,7 +30,7 @@ class Response implements ResponseInterface
      */
     public function setSid($sid)
     {
-        $this->sid = $sid;
+        return $this->setData(self::SID, $sid);
     }
 
     /**
@@ -52,7 +38,7 @@ class Response implements ResponseInterface
      */
     public function getStatus()
     {
-        return $this->status;
+        return $this->getData(self::STATUS);
     }
 
     /**
@@ -60,7 +46,7 @@ class Response implements ResponseInterface
      */
     public function setStatus($status)
     {
-        $this->status = $status;
+        return $this->setData(self::STATUS, $status);
     }
 
     /**
@@ -68,7 +54,7 @@ class Response implements ResponseInterface
      */
     public function getBody()
     {
-        return $this->body;
+        return $this->getData(self::BODY);
     }
 
     /**
@@ -76,6 +62,6 @@ class Response implements ResponseInterface
      */
     public function setBody($body)
     {
-        $this->body = $body;
+        return $this->setData(self::BODY, $body);
     }
 }

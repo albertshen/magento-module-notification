@@ -58,6 +58,7 @@ class Notifier
     /**
      * Notify all notifier
      * @param \Magento\Sales\Api\Data\OrderInterface $order
+     * @return void
      */
     public function notify(
         \Magento\Sales\Api\Data\OrderInterface $order

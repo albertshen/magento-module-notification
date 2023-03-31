@@ -4,7 +4,7 @@
  * Copyright © PHP Digital, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace AlbertMage\Notification\Api;
+namespace AlbertMage\Notification\Api\Data;
 
 /**
  * Interface for sms result.
@@ -17,6 +17,12 @@ interface ResponseInterface
     const STATUS_SUCCESS = 'success';
 
     const STATUS_FAILURE = 'failure';
+
+    const SID = 'sid';
+
+    const STATUS = 'status';
+
+    const BODY = 'body';
 
     /**
      * Get sid.
